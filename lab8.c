@@ -18,28 +18,31 @@ int mygetch()
 
 int main()
 {
-    /*char a = mygetch(mygetch(mygetch(mygetch())));
-    printf("%hhd\n", a);
-    return 0;*/
-    char a, b;
+    unsigned char c, b;
     int k = 0;
-    do
+    for (;;)
     {
-        scanf("%c", &a);
-        if (isdigit(a) != 0)
+        c = mygetch();
+        if (isdigit(c) != 0)
             k += 1;
-        b = a;
-        b = mygetch();
-        if (b == 27)
+        printf("%c", c);
+        c;
+        if (c == 27)
+        {
             b = mygetch();
-        if (b == 91)
-            b = mygetch();
-
-        else
-        printf("%c ", b);
-    } while (b != 50);
-    if (k != 0)
-        printf("Number of digits - %d\n", k);
-    else
-        printf("There are no digits \n");
+            if (c == 91)
+            {
+                c = mygetch();
+                if (c == 50)
+                {
+                    c = mygetch();
+                    if (c == 51)
+                    {
+                        printf("\nKolichestvo chisel: %d\n", k);
+                        return 0;
+                    }
+                }
+            }
+        }
+    }
 }
