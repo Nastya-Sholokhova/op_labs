@@ -23,22 +23,22 @@ int main()
     for (;;)
     {
         c = mygetch();
-        if (isdigit(c) != 0)
+        printf("%hhd%c  ", c, c);
+        if (48 <= c && c <= 57)
             k += 1;
-        printf("%c", c);
-        c;
-        if (c == 27)
+        b = c;
+        if (b == 27)
         {
             b = mygetch();
-            if (c == 91)
+            if (b == 91)
             {
-                c = mygetch();
-                if (c == 50)
+                b = mygetch();
+                if (b == 50)
                 {
-                    c = mygetch();
-                    if (c == 51)
+                    b = mygetch();
+                    if (b == 51)
                     {
-                        printf("\nKolichestvo chisel: %d\n", k);
+                        printf("  Kolichestvo chisel: %d\n", k);
                         return 0;
                     }
                 }
