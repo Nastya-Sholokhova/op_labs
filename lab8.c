@@ -23,8 +23,9 @@ int main()
     for (;;)
     {
         c = mygetch();
-        printf("%hhd%c  ", c, c);
-        if (48 <= c && c <= 57)
+        if (c != 27)
+            printf("%c", c);
+        if (48 <= c && c <= 57 && c != 27)
             k += 1;
         b = c;
         if (b == 27)
