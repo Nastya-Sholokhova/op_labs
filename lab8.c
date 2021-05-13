@@ -19,14 +19,17 @@ int mygetch()
 int main()
 {
     unsigned char c, b;
-    int k = 0;
+    int k = 0, n = 0;
     for (;;)
     {
         c = mygetch();
-        if (c != 27)
-            printf("%c", c);
         if (48 <= c && c <= 57 && c != 27)
+        {
             k += 1;
+            printf("%c", c);
+        }
+        if (isalpha(c) != 0)
+            printf("%c", c);
         b = c;
         if (b == 27)
         {
@@ -39,10 +42,12 @@ int main()
                     b = mygetch();
                     if (b == 51)
                     {
-                        printf("  Kolichestvo chisel: %d\n", k);
+                        printf("  Kolichestvo chisel: %d\n", k - n);
                         return 0;
                     }
                 }
+                else if (b == 49)
+                    n += 1;
             }
         }
     }
