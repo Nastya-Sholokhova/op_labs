@@ -1,67 +1,55 @@
 #include <stdio.h>
 #include <string.h>
 
+int memory(int len, char *p, int *inew, int j)
+{
+    for (int i = 0; i < len; i++)
+    {
+        if (i != 0 && p[0] == p[i])
+            inew[j] = i;
+        j++;
+    }
+    return j;
+}
+
 int main()
 {
-    int i, len, inew[256], j = 0, k = 0, t = 0;
-    char str[256], new[256];
+    int i, len, t = 0, j = 0;
+    char str[256], new[256], strnew[256], strnew1[256];
     scanf("%255[^\n]", &str);
-    char delim[] = " , ";
+    for (i = 0; i < strlen(str); i++)
+        strnew[i] = str[i];
+
+    char delim[] = " ,";
     char *p = strtok(str, delim);
+    int inew[strlen(strnew)];
     len = strlen(p);
 
-    for (i = 0; i < 256; i++)
+    for (i = 0; i < strlen(strnew); i++)
         inew[i] = 0;
-
-    for (i = 0; i < len; i++)
-    {
-        if (p[0] == p[i])
-        {
-            inew[j] = i;
-            j++;
-        }
-    }
+    j = memory(len, p, inew, j);
+    j++;
 
     while (p = strtok(NULL, delim))
     {
         len = strlen(p);
-        new[0] = p[0];
-        for (i = 1; i < len; i++)
+        j = memory(len, p, inew, j);
+        j++;
+    }
+
+    for (i = 0; i < (j - 1); i++)
+    {
+        if (inew[i] == 0)
         {
-            if (p[0] == p[i])
-            {
-                inew[j] = i;
-                j++;
-            }
+            new[t] = strnew[i];
+            t++;
         }
     }
 
-    j = 0;
-
-    for (i = 0; i < strlen(str); i++)
-        if (str[i] == ' ')
-            k += 1;
-    for (i = 0; i < (k + 1); i++)
-    {
-        do
-        {
-            if (t != inew[j])
-                new[t] = str[t];
-            t++;
-            j++;
-        } while (str[t] != ' ');
-        j = 0;
-    }
-
-    printf("Chisla povtor: ");
-
-    for (i = 0; i < 256; i++)
-        if (inew[i] != 0)
-            printf("%d ", inew[i]);
+    for (i = 0; i < (strlen(strnew) - 1); i++)
+        printf("%d", inew[i]);
     printf("\n");
-    for (i = 0; i < strlen(new); i++)
-        printf("%s ", new);
-    printf(" ");
+    printf("%s", new);
     printf("\n");
     return 0;
 }
